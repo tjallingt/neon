@@ -10,6 +10,7 @@ mod js {
     pub mod objects;
     pub mod types;
     pub mod strings;
+    pub mod sync;
 }
 
 use js::arrays::*;
@@ -21,6 +22,7 @@ use js::numbers::*;
 use js::objects::*;
 use js::types::*;
 use js::strings::*;
+use js::sync::*;
 
 register_module!(|mut cx| {
     let greeting = cx.string("Hello, World!");
@@ -183,6 +185,13 @@ register_module!(|mut cx| {
     cx.export_function("ref_person_set_name", ref_person_set_name)?;
     cx.export_function("ref_person_fail", ref_person_fail)?;
     cx.export_function("external_unit", external_unit)?;
+
+    cx.export_function("useless_root", useless_root)?;
+    cx.export_function("thread_callback", thread_callback)?;
+    cx.export_function("multi_threaded_callback", multi_threaded_callback)?;
+    cx.export_function("greeter_new", greeter_new)?;
+    cx.export_function("greeter_greet", greeter_greet)?;
+    cx.export_function("leak_event_queue", leak_event_queue)?;
 
     Ok(())
 });
